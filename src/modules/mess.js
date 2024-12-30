@@ -113,7 +113,7 @@ const checkItemId = ({id}) =>{
 }
 const addSuggestion = ({changes_old_item,changes_new_item,user_id,reason}) =>{
     return new Promise((resolve,reject)=>{
-        const q = `insert into suggestions (changes_old_item,changes_new_item,user_id,reason,created_at) values (?,?,?,?,?);`;
+        const q = `insert into  (changes_old_item,changes_new_item,user_id,reason,created_at) values (?,?,?,?,?);`;
         db.query(q,[changes_old_item,changes_new_item,user_id,reason,getTime()],(err,result)=>{
             if (err){
                 reject(err)
@@ -123,9 +123,9 @@ const addSuggestion = ({changes_old_item,changes_new_item,user_id,reason}) =>{
         })
     })
 }
-const countSuggestions = ({user_id}) =>{
+const count = ({user_id}) =>{
     return new Promise((resolve,reject)=>{
-        const q = `select count(*) as count from suggestions where user_id=?;`;
+        const q = `select count(*) as count from  where user_id=?;`;
         db.query(q,[user_id],(err,result)=>{
             if (err){
                 reject(err)
@@ -364,9 +364,9 @@ const totalFeedbacks = ({meal_date}) =>{
         })
     })
 }
-const suggestions = ({page}) =>{
+const suggestions  = ({page}) =>{
     return new Promise((resolve,reject)=>{
-        const q = `select s.suggestion_id,s.changes_old_item,s.changes_new_item,s.user_id,s.created_at,u.name from suggestions as s LEFT JOIN users as u on s.user_id=u.user_id ORDER BY created_at DESC LIMIT 20 OFFSET ${20*(page-1)} ; `;
+        const q = `select s.suggestion_id,s.changes_old_item,s.changes_new_item,s.reason,s.user_id,s.created_at,u.name from  as s LEFT JOIN users as u on s.user_id=u.user_id ORDER BY created_at DESC LIMIT 20 OFFSET ${20*(page-1)} ; `;
         db.query(q,(err,result)=>{
             if (err){
                 reject(err)
@@ -376,9 +376,9 @@ const suggestions = ({page}) =>{
         })
     })
 }
-const totalSuggestions = () =>{
+const total = () =>{
     return new Promise((resolve,reject)=>{
-        const q = `select count(*) as count from suggestions;`;
+        const q = `select count(*) as count from ;`;
         db.query(q,(err,result)=>{
             if (err){
                 reject(err)
