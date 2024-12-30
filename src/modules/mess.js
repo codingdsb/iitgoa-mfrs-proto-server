@@ -113,7 +113,7 @@ const checkItemId = ({id}) =>{
 }
 const addSuggestion = ({changes_old_item,changes_new_item,user_id,reason}) =>{
     return new Promise((resolve,reject)=>{
-        const q = `insert into  (changes_old_item,changes_new_item,user_id,reason,created_at) values (?,?,?,?,?);`;
+        const q = `insert into suggestions (changes_old_item,changes_new_item,user_id,reason,created_at) values (?,?,?,?,?);`;
         db.query(q,[changes_old_item,changes_new_item,user_id,reason,getTime()],(err,result)=>{
             if (err){
                 reject(err)
@@ -123,9 +123,9 @@ const addSuggestion = ({changes_old_item,changes_new_item,user_id,reason}) =>{
         })
     })
 }
-const count = ({user_id}) =>{
+const countSuggestions = ({user_id}) =>{
     return new Promise((resolve,reject)=>{
-        const q = `select count(*) as count from  where user_id=?;`;
+        const q = `select count(*) as count from suggestions  where user_id=?;`;
         db.query(q,[user_id],(err,result)=>{
             if (err){
                 reject(err)
