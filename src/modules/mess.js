@@ -376,9 +376,9 @@ const suggestions  = ({page}) =>{
         })
     })
 }
-const total = () =>{
+const totalSuggestions = () =>{
     return new Promise((resolve,reject)=>{
-        const q = `select count(*) as count from ;`;
+        const q = `select count(*) as count from suggestions;`;
         db.query(q,(err,result)=>{
             if (err){
                 reject(err)
