@@ -14,6 +14,6 @@ app.use(cors({
     origin:"*"
 }))
 app.use(expressFileUpload())
-app.get("/time",(req,res)=>{res.send((new Date()).toString()})
+app.get("/time",(req,res)=>{res.send((new Date()).toString())})
 app.use("/",typeChecker,lengthChecker, require("./src/routes/routes"))
 app.listen(process.env.PORT,process.env.API_URL)
